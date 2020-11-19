@@ -5,7 +5,7 @@
 //
 #include <fstream>
 #include <cstdint>
-#include "basecandle.h"
+#include "candle.h"
 //
 // -----------------------------------------------------------------------------
 //
@@ -36,14 +36,14 @@ public:
    }
    void open(const char *pszFileName, uint32_t nBegin = 0);
    template <typename _Tf, typename _Tv>
-   bool read(base_candle<_Tf, _Tv> &record, uint32_t nEnd = 0);
+   bool read(candle<_Tf, _Tv> &record, uint32_t nEnd = 0);
    int8_t interval(); 
 };       
 //
 // -----------------------------------------------------------------------------
 //
 template <typename _Tf, typename _Tv>
-bool StocksReader::read(base_candle<_Tf, _Tv> &record, uint32_t nEnd)
+bool StocksReader::read(candle<_Tf, _Tv> &record, uint32_t nEnd)
 {
    uint32_t nQuikDate;
    uint32_t nQuikTime;

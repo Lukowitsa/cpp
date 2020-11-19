@@ -7,6 +7,7 @@
 #include <cmath>
 #include <algorithm>
 #include <set>
+#include <limits>
 //
 // Aleksandr Ljwowich (R) (TM) design and code programming (C), 2019.
 //
@@ -50,7 +51,7 @@ _Tf max_distance(const _Tf *x1, const _Tf *x2, uint32_t n)
 // -----------------------------------------------------------------------------
 //
 template <typename _Tf>
-_Tf max_distance(_Tf *x1, _Tf *y1, uint32_t n1, _Tf *x2, _Tf *y2, uint32_t n2, uint32_t nOmit = 0U)
+_Tf max_distance(_Tf *x1, _Tf *y1, int16_t *t1, uint32_t n1, _Tf *x2, _Tf *y2, int16_t *t2, uint32_t n2, uint32_t nOmit = 0U)
 {
    const uint32_t n = n1 * n2; 
 
@@ -68,11 +69,11 @@ _Tf max_distance(_Tf *x1, _Tf *y1, uint32_t n1, _Tf *x2, _Tf *y2, uint32_t n2, u
    for ( uint32_t i = 0; i < n1; ++i )
       for ( uint32_t j = 0; j < n2; ++j, ++k )    
       {
-         const _Tf dx = x1[i] - x2[j];
-         const _Tf dy = y1[i] - y2[j];
-
          index[k] = distance + k;
-         distance[k] = std::sqrt(dx*dx + dy*dy);
+         if ( t1 != NULL && t2 != NULL && t1[i] == t2[j] ) 
+            distance[k] = std::hypot(x1[i] - x2[j], y1[i] - y2[j]);
+         else  
+            distance[k] = std::numeric_limits<_Tf>::max();  
       }    
       
    std::sort
