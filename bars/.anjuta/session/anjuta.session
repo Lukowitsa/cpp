@@ -1,0 +1,32 @@
+[Anjuta]
+Maximized=1
+Geometry=1024x719+0+25
+
+[Execution]
+Program arguments=-i "/home/aleksandr/.wine/drive_c/Котировки/GAZP*.txt" -o a.txt%%%--dayoff -i "/home/aleksandr/.wine/drive_c/Котировки/SBER_DAYS.txt" -o a.txt%%%--daytime -i "/home/aleksandr/.wine/drive_c/Котировки/SBER_DAYS.txt" -o a.txt%%%--daytime -i "/home/aleksandr/.wine/drive_c/Котировки/*.txt" -o a.txt%%%--dayoff -i "/home/aleksandr/.wine/drive_c/Котировки/*.txt" -o a.txt%%%--merge -i "/home/aleksandr/.wine/drive_c/Котировки/*.txt" -o a.txt%%%--merge -i "/home/aleksandr/.wine/drive_c/Котировки/*.txt" a.txt%%%--merge "/home/aleksandr/.wine/drive_c/Котировки/*.txt" a.txt%%%--merge "/home/aleksandr/.wine/drive_c/Котировки/*" a.txt%%%--merge "/home/aleksandr/.wine/drive_c/Котировки" a.txt
+Program uri=../../Debug/src/test/circle_test%%%../../Debug/src/test/sse_test%%%../../Debug/src/test/datetime_test%%%../../Debug/src/bars%%%../../Debug/src/test_datetime
+Run in terminal=2
+Working directories=../../../bars
+
+[File Loader]
+Files=../../src/test/circle_test.cc#14%%%../../src/bars.cc#183
+
+[Document Manager]
+bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
+
+[Project Manager]
+Shortcut=bars//src//bars%%%bars//src//test//datetime_test%%%bars//src//test//sse_test%%%bars//src//test//circle_test
+Expand=bars%%%bars//src%%%bars//src//test%%%bars//src//test//circle_test%%%bars//src//test//datetime_test%%%bars//src//test//sse_test%%%bars//src//bars%%%bars//dist_doc
+
+[Build]
+Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Debug%%%1:MinGW32:MinGW32
+Selected Configuration=Debug
+BuildArgs/Default=
+BuildArgs/Debug=--enable-maintainer-mode  'CFLAGS=-g -O0' 'CXXFLAGS=-march=native -msse4.2 -mavx -g -std=gnu++11 -O3 -I/home/aleksandr/Work/cpp/bars/src/common/' 'JFLAGS=-g -O0' 'FFLAGS=-g -O0'
+BuildArgs/Profiling=--enable-maintainer-mode 'CFLAGS=-g -pg' 'CXXFLAGS=-g -pg' 'JFLAGS=-g -pg' 'FFLAGS=-g -pg'
+BuildArgs/Optimized=\s'CFLAGS=-O2' 'CXXFLAGS=-O2 -std=gnu++11' 'JFLAGS=-O2' 'FFLAGS=-O2'
+BuildArgs/MinGW32=--enable-maintainer-mode 'CFLAGS=-g -O0' 'CXXFLAGS=-fexec-charset=windows-1251 -g -std=gnu++11 -O3 -I/home/aleksandr/Work/cpp/bars/src/common/' --host=i686-w64-mingw32 'PKG_CONFIG_PATH=/usr/i686-w64-mingw32/lib/pkgconfig:/usr/i686-w64-mingw32/share/pkgconfig:/usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig:/usr/i686-w64-mingw32/sys-root/mingw/share/pkgconfig'
+
+[Debugger]
+Breakpoint=1:../../src/test/sse_test.cc:46:0:%%%1:../../src/common/vector_ops.h:22:0:%%%1:../../src/common/vector_ops.h:20:0:%%%1:../../../ALMLIB/vectors.h:34:0:%%%1:../../../ALMLIB/vectors.h:74:0:%%%1:../../../ALMLIB/vectors.h:111:0:%%%1:../../../ALMLIB/vectors.h:28:0:%%%1:../../src/common/vectors.h:28:0:%%%1:../../src/common/vectors.h:59:0:%%%1:../../src/test/sse_test.cc:151:0:%%%1:../../src/test/sse_test.cc:91:0:%%%1:../../src/test/sse_test.cc:159:0:
+Stop at beginning=2

@@ -1,0 +1,50 @@
+../common/datetime.o: \
+ /home/aleksandr/Work/cpp/bars/src/test/../common/datetime.cpp \
+ /home/aleksandr/Work/cpp/bars/src/test/../common/datetime.h \
+ /usr/include/c++/4.8/cstdint \
+ /usr/include/c++/4.8/i686-w64-mingw32/bits/c++config.h \
+ /usr/include/c++/4.8/i686-w64-mingw32/bits/os_defines.h \
+ /usr/include/c++/4.8/i686-w64-mingw32/bits/cpu_defines.h \
+ /usr/lib/gcc/i686-w64-mingw32/4.8/include/stdint.h \
+ /usr/share/mingw-w64/include/stdint.h \
+ /usr/share/mingw-w64/include/crtdefs.h \
+ /usr/share/mingw-w64/include/_mingw.h \
+ /usr/share/mingw-w64/include/_mingw_mac.h \
+ /usr/share/mingw-w64/include/_mingw_secapi.h \
+ /usr/share/mingw-w64/include/vadefs.h \
+ /usr/share/mingw-w64/include/sdks/_mingw_directx.h \
+ /usr/share/mingw-w64/include/sdks/_mingw_ddk.h \
+ /usr/lib/gcc/i686-w64-mingw32/4.8/include/stddef.h \
+ /usr/share/mingw-w64/include/stddef.h
+
+/home/aleksandr/Work/cpp/bars/src/test/../common/datetime.h:
+
+/usr/include/c++/4.8/cstdint:
+
+/usr/include/c++/4.8/i686-w64-mingw32/bits/c++config.h:
+
+/usr/include/c++/4.8/i686-w64-mingw32/bits/os_defines.h:
+
+/usr/include/c++/4.8/i686-w64-mingw32/bits/cpu_defines.h:
+
+/usr/lib/gcc/i686-w64-mingw32/4.8/include/stdint.h:
+
+/usr/share/mingw-w64/include/stdint.h:
+
+/usr/share/mingw-w64/include/crtdefs.h:
+
+/usr/share/mingw-w64/include/_mingw.h:
+
+/usr/share/mingw-w64/include/_mingw_mac.h:
+
+/usr/share/mingw-w64/include/_mingw_secapi.h:
+
+/usr/share/mingw-w64/include/vadefs.h:
+
+/usr/share/mingw-w64/include/sdks/_mingw_directx.h:
+
+/usr/share/mingw-w64/include/sdks/_mingw_ddk.h:
+
+/usr/lib/gcc/i686-w64-mingw32/4.8/include/stddef.h:
+
+/usr/share/mingw-w64/include/stddef.h:

@@ -1,0 +1,210 @@
+//
+// vectors.h
+//
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include "vectors.h"
+//
+// -----------------------------------------------------------------------------
+//
+#define N 50005  
+inline __attribute__((always_inline)) float vector_mul_cpp(const float *x, const float *y, int n)
+{
+   float s[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+   for ( int i = 0; i < n / 8; ++i ) 
+   {
+      float m[8];
+      for ( int j = 0; j < 8; ++j )
+      { 
+         m[j]  = x[j] * y[j];
+         s[j] += m[j];
+      }
+      x += 8;
+      y += 8;   
+   }
+   for ( int i = 0; i < n % 8; ++i )
+      s[i] += x[i] * y[i];
+
+   s[0] = s[0] + s[1];
+   s[1] = s[2] + s[3];
+   s[4] = s[4] + s[5];
+   s[5] = s[6] + s[7];
+
+   s[0] = s[0] + s[1];
+   s[4] = s[4] + s[5];
+
+   return s[0] + s[4];
+}
+//
+// -----------------------------------------------------------------------------
+//
+inline __attribute__((always_inline)) double vector_mul_cpp(const double *x, const double *y, int n)
+{
+   double s[4] = {0.0, 0.0, 0.0, 0.0};
+   for ( int i = 0; i < n / 4; ++i ) 
+   {
+      double m[4];
+      for ( int j = 0; j < 4; ++j )
+      { 
+         m[j]  = x[j] * y[j];
+         s[j] += m[j];
+      }
+      x += 4;
+      y += 4;
+   }
+   for ( int i = 0; i < n % 4; ++i )
+      s[i] += x[i] * y[i];
+
+   s[0] = s[0] + s[1];
+   s[2] = s[2] + s[3];
+
+   return s[0] + s[2];
+}
+//
+// -----------------------------------------------------------------------------
+//
+//   printf("m= %g %g %g %g %g %g %g %g\n", m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7]);
+int main()
+{ 
+/*
+   float a[13] = {1, 2, 3, 4, 5, 6, 7, 8,9, 10, 11, 12};
+   float r = alm::vectors_max(a, 12);
+   printf("r = %g", r);
+   return 0;
+  */ 
+   {
+      float *x = (float*) malloc(N * sizeof(float));
+
+      for ( int i = -N/2; i < N-N/2; ++i ) 
+         x[i+N/2] = i;
+         
+      for ( int i = 2; i < N; ++i ) 
+      {   
+         float nMax = alm::vectors_max(x, i);
+         if ( nMax != i-i/2-1 )
+            printf("Error Max float %d %g", i, nMax);
+         float nMin = alm::vectors_min(x, i);
+         if ( nMin != -(i/2+2) )
+            printf("Error Min float %d %g", i, nMin);
+      }   
+      return 0;   
+      for ( int i = 2; i < N; ++i )
+      {
+         for ( int j = -N/2; j < N-N/2; ++j ) 
+             x[j] = -j;
+
+         alm::vectors_nrm(x, 3.0, 50.0, i);
+
+         for ( int j = 0; j < i; ++j )
+            if ( x[j] != ((-j)-3.0) * 50.0 )
+               printf("Error Nrm float %d %g\n", j, x[j]);         
+      } 
+      free(x);
+   }          
+
+   {
+      double *x = (double*) malloc(N * sizeof(double));
+
+      for ( int i = 0; i < N; ++i ) 
+         x[i] = i;
+         
+      for ( int i = -N/2; i < N-N/2; ++i ) 
+      {   
+         double nMax = alm::vectors_max(x, i);
+         if ( nMax != i - 1 )
+            printf("Error Max double %d %g", i, nMax);
+         float nMin = alm::vectors_min(x, i);
+         if ( nMin != i - 1 )
+            printf("Error Min float %d %g", i, nMin);
+
+         for ( int i = 2; i < N; ++i )
+         {
+            for ( int j = -N/2; j < N-N/2; ++j ) 
+                x[j] = -j;
+
+            alm::vectors_nrm(x, 3.0, 50.0, i);
+
+            for ( int j = 0; j < i; ++j )
+               if ( x[j] != ((-j)-3.0) * 50.0 )
+                  printf("Error Nrm float %d %g\n", j, x[j]);         
+         } 
+      }   
+      free(x);
+   }          
+
+   {  
+      float *x = (float*) malloc(N * sizeof(float));
+      float *y = (float*) malloc(N * sizeof(float));
+      float *s = (float*) malloc(N * sizeof(float));;
+      float *v = (float*) malloc(N * sizeof(float));;
+
+      for ( int i = 0; i < N; ++i ) 
+      { 
+         x[i] = i % 10; 
+         y[i] = i % 20; 
+//       x[i] = i; 
+//       y[i] = i; 
+      }
+
+      clock_t t = clock();
+      for ( int j = 0; j < N; ++j ) 
+         v[j] = vector_mul_cpp(x, y, j+1);
+      t = clock() - t;
+      printf("Result (cpp): %f Time: %d\n", v[N-1], (int) t);
+
+      t = clock();
+      for ( int j = 0; j < N; ++j ) 
+         s[j] = alm::vectors_dp(x, y, j+1);
+      t = clock() - t;
+      printf("Result (asm): %f Time: %d\n", s[N-1], (int) t);
+
+      for ( int j = 0; j < N; ++j ) 
+         if ( s[j] != v[j]  )
+            printf("Error: n=%d: %g <> %g\n", j+1, v[j], s[j]);
+
+      free(x);
+      free(y);
+      free(s); 
+      free(v);
+   }
+
+   {  
+      double *x = (double*) malloc(N * sizeof(double));
+      double *y = (double*) malloc(N * sizeof(double));
+      double *s = (double*) malloc(N * sizeof(double));;
+      double *v = (double*) malloc(N * sizeof(double));;
+
+      for ( int i = 0; i < N; ++i ) 
+      { 
+         x[i] = i % 10; 
+         y[i] = i % 20; 
+      }
+
+      clock_t t = clock();
+      for ( int j = 0; j < N; ++j ) 
+         v[j] = vector_mul_cpp(x, y, j+1);
+      t = clock() - t;
+      printf("Result (cpp): %f Time: %d\n", v[N-1], (int) t);
+
+      t = clock();
+      for ( int j = 0; j < N; ++j ) 
+         s[j] = alm::vectors_dp(x, y, j+1);
+      t = clock() - t;
+      printf("Result (asm): %f Time: %d\n", s[N-1], (int) t);
+
+      for ( int j = 0; j < N; ++j ) 
+         if ( s[j] != v[j]  )
+            printf("Error: n=%d: %g <> %g\n", j+1, v[j], s[j]);
+      
+      free(x);
+      free(y);
+      free(s);
+      free(v);
+   }
+
+   return 0;
+}
+//
+// -----------------------------------------------------------------------------
+//
