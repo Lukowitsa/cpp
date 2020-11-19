@@ -14,10 +14,10 @@ AM_CFLAGS =\
 bin_PROGRAMS = bars
 
 bars_SOURCES = \
-	common/basecandle.h \
 	common/datetime.h \
 	bars.cc \
-	common/datetime.cpp
+	common/datetime.cpp \
+	common/candle.h
 
 bars_CXXFLAGS = -I/home/aleksandr/Work/cpp/bars/src/common 
 

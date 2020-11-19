@@ -117,7 +117,7 @@ bars-bars.o: /home/aleksandr/Work/cpp/bars/src/bars.cc \
  /usr/include/c++/4.8/bits/stl_multiset.h /usr/include/c++/4.8/limits \
  /usr/include/string.h /usr/include/x86_64-linux-gnu/bits/string3.h \
  /home/aleksandr/Work/cpp/bars/src/common/datetime.h \
- /home/aleksandr/Work/cpp/bars/src/common/basecandle.h
+ /home/aleksandr/Work/cpp/bars/src/common/candle.h
 
 /usr/include/stdc-predef.h:
 
@@ -427,4 +427,4 @@ bars-bars.o: /home/aleksandr/Work/cpp/bars/src/bars.cc \
 
 /home/aleksandr/Work/cpp/bars/src/common/datetime.h:
 
-/home/aleksandr/Work/cpp/bars/src/common/basecandle.h:
+/home/aleksandr/Work/cpp/bars/src/common/candle.h:

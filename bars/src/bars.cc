@@ -12,7 +12,7 @@
 #include <cstdint>
 
 #include "datetime.h"
-#include "basecandle.h"
+#include "candle.h"
 //
 // -----------------------------------------------------------------------------
 //
@@ -20,7 +20,7 @@ using namespace std;
 //
 // -----------------------------------------------------------------------------
 //
-struct Record: alm::base_candle<double, uint32_t>
+struct Record: alm::candle<double, uint32_t>
 {
    inline Record(char *pszFileName)
    {
@@ -56,7 +56,7 @@ char *Record::get(char *pszBuffer) const
    return pszBuffer;
 }
 
-bool read_txt(istream &f, alm::base_candle<double, uint32_t> &record, bool bNoTime = false, bool bOHLC = false)
+bool read_txt(istream &f, alm::candle<double, uint32_t> &record, bool bNoTime = false, bool bOHLC = false)
 {
    uint32_t nQuikDate;
    uint32_t nQuikTime;
@@ -107,7 +107,7 @@ bool read_txt(istream &f, alm::base_candle<double, uint32_t> &record, bool bNoTi
    return p != f.tellg();
 }
 
-void save_txt(ostream &f, const alm::base_candle<double, uint32_t> &record)
+void save_txt(ostream &f, const alm::candle<double, uint32_t> &record)
 {
    f << record.getQuikDate() << ';' << setfill('0') << setw(4) << record.getQuikTime() << ';' <<
         record.m_nHigh << ';' << record.m_nLow   << ';' <<

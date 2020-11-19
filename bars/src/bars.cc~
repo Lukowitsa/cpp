@@ -12,7 +12,7 @@
 #include <cstdint>
 
 #include "datetime.h"
-#include "basecandle.h"
+#include "candle.h"
 //
 // -----------------------------------------------------------------------------
 //
@@ -20,7 +20,7 @@ using namespace std;
 //
 // -----------------------------------------------------------------------------
 //
-struct Record: alm::base_candle<double, uint32_t>
+struct Record: alm::candle<double, uint32_t>
 {
    inline Record(char *pszFileName)
    {
@@ -56,7 +56,7 @@ char *Record::get(char *pszBuffer) const
    return pszBuffer;
 }
 
-bool read_txt(istream &f, alm::base_candle<double, uint32_t> &record, bool bNoTime = false, bool bOHLC = false)
+bool read_txt(istream &f, alm::candle<double, uint32_t> &record, bool bNoTime = false, bool bOHLC = false)
 {
    uint32_t nQuikDate;
    uint32_t nQuikTime;
@@ -180,7 +180,6 @@ int merge(set<Record> &records, set<alm::date> &dayOff, glob_t *p_globbuf, bool 
             found->m_nVolume != record.m_nVolume
          ) 
          {
-
             cout << "\n\033[1;31mОбнаружены различия в записях:" << "\033[0m" << endl; 
             cout << record.get(szBuffer1) << found->get(szBuffer2);
           //if ( !bOHLC )
